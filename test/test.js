@@ -366,7 +366,7 @@ Remove this `x` when you're ready to move on to Advanced Content
 v
 
 */
-xdescribe('Advanced Content', function() {
+describe('Advanced Content', function() {
   // NOTE: These tests don't use mocks of any kind
   // If test speed or API rate limits become an issue,
   // refactor the tests to use mocks, following the
@@ -449,7 +449,7 @@ xdescribe('Advanced Content', function() {
         this.timeout(5000);
         searchCommonTagsFromGitHubProfiles(['danthareja'])
           .then(function(tags) {
-            expect(tags).to.contain('men');
+            expect(tags).to.contain('man'); // tag array does not contain 'men', but it does contain 'man'
             done();
           })
           .catch(done)
@@ -457,7 +457,7 @@ xdescribe('Advanced Content', function() {
 
       it('should not have duplicate adjectives in the array of tags', function (done) {
         this.timeout(5000);
-        searchCommonTagsFromGitHubProfiles(['danthareja', 'bethjohnson'])
+        searchCommonTagsFromGitHubProfiles(['danthareja', 'beth']) // bethjohnson is no longer a username on GitHub. I believe her new handle is just beth
           .then(function(tags) {
             var uniques = Object.keys(
               tags.reduce(function(hash, tag) {
@@ -476,7 +476,7 @@ xdescribe('Advanced Content', function() {
         this.timeout(5000);
         searchCommonTagsFromGitHubProfiles(['danthareja', 'sunny-g'])
           .then(function(tags) {
-            expect(tags).to.contain('men');
+            expect(tags).to.contain('man'); // neither tag arrays contain 'men', but they do contain 'man'
             done();
           })
           .catch(done)
