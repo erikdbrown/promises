@@ -60,36 +60,36 @@ var getGitHubProfile = function (user, callback) {
  });
 };
 
-var getGitHubProfileAsync; // TODO
+var getGitHubProfileAsync = Promise.promisify(getGitHubProfile);
 
 
 // (2) Asyncronous token generation
 var generateRandomToken = function (callback) {
  crypto.randomBytes(20, function(err, buffer) {
-   if (err) return callback(err, null)
-   callback(null, buffer.toString('hex'));
+   if (err) { callback(err, null) }
+   else { callback(null, buffer.toString('hex')); }
  });
 };
 
-var generateRandomTokenAsync; // TODO
+var generateRandomTokenAsync = Promise.promisify(generateRandomToken);
 
 
 // (3) Asyncronous file manipulation
 var readFileAndMakeItFunny = function (filePath, callback) {
  fs.readFile(filePath, 'utf8', function(err, file) {
-   if (err) return callback(err);
-   
-   var funnyFile = file.split('\n')
-     .map(function(line) {
+   if (err) { callback(err); }
+   else {
+    var funnyFile = file.split('\n').map(function(line) {
        return line + ' lol';
      })
      .join('\n')
 
-   callback(funnyFile);
+    callback(err, funnyFile);
+   }
  });
 };
 
-var readFileAndMakeItFunnyAsync; // TODO
+var readFileAndMakeItFunnyAsync = Promise.promisify(readFileAndMakeItFunny); // TODO
 
 // Export these functions so we can unit test them
 // and reuse them in later code ;)
